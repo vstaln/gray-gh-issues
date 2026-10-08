@@ -1,0 +1,17 @@
+[package]
+name = "gray-gh-issues"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.91"
+license = "MIT"
+description = "Append referenced GitHub issue titles to prompts mentioning #N. Port of pi's github-issue-autocomplete."
+
+[[bin]]
+name = "gray-gh-issues"
+path = "src/main.rs"
+
+[dependencies]
+serde_json = "1"
+
+[profile.release]
+strip = true
