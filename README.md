@@ -1,9 +1,32 @@
 # gray-gh-issues
 
-Append referenced GitHub issue titles to prompts mentioning #N. Port of pi's github-issue-autocomplete.
+Resolve `#N` references into GitHub issue titles on submit — a gray sidecar.
+Port of pi's `github-issue-autocomplete` (gray has no autocomplete wire, so
+this resolves references instead of suggesting them).
 
-A sidecar plugin for [gray](https://github.com/vstaln/gray), scaffolded by
-[gray-account](https://github.com/vstaln/gray-account).
+## What it does
+
+Hooks `input/submit` (protocol 2.0). When the submitted text mentions `#<n>`
+and the session cwd is a checkout with a GitHub remote, each issue is looked
+up with `gh issue view <n>` (5s timeout, cached in-memory for the process)
+and the input is rewritten with an appended context block:
+
+```
+Referencing issues: #12 'Fix crash (OPEN)' · #9 'Add login (MERGED)'
+```
+
+Fail-open everywhere: `gh` missing, non-GitHub repo, or every lookup
+failing → the input passes through unchanged. Requires the `gh` CLI.
+
+`/ghissues` reports status; `/ghissues on|off` toggles (state in
+`~/.gray/gh-issues/`).
+
+## Wire methods
+
+- `plugin/manifest`, `plugin/shutdown`
+- `input/submit` — `{text}` rewrite / `{}` pass
+- `command/run` — `/ghissues`, `/ghissues on|off`
+- no sidecar→host requests, no capabilities
 
 ## Install
 
