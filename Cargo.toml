@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2024"
 rust-version = "1.91"
 license = "MIT"
-description = "Append referenced GitHub issue titles to prompts mentioning #N. Port of pi's github-issue-autocomplete."
+description = "Append referenced GitHub issue titles to prompts mentioning #N"
 
 [[bin]]
 name = "gray-gh-issues"

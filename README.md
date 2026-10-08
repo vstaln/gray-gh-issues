@@ -1,8 +1,14 @@
-# gray-gh-issues
-
-Resolve `#N` references into GitHub issue titles on submit — a gray sidecar.
-Port of pi's `github-issue-autocomplete` (gray has no autocomplete wire, so
-this resolves references instead of suggesting them).
+<p align="center">
+  <img src="assets/gray-logo.svg" alt="gray" width="96">
+  <img src="assets/github.svg" alt="github" width="96">
+</p>
+<h1 align="center">gray-gh-issues</h1>
+<p align="center">Resolves #N references into GitHub issue titles when a prompt is submitted.</p>
+<p align="center">
+  <a href="https://github.com/vstaln/gray-gh-issues/blob/main/LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
+  <img alt="gray plugin" src="https://img.shields.io/badge/gray-plugin-7aa2f7.svg">
+  <img alt="rust" src="https://img.shields.io/badge/built%20with-rust-orange.svg">
+</p>
 
 ## What it does
 
@@ -44,3 +50,7 @@ gray account publish    # check → build → release → publish to the gray re
 
 Bump `version` in `Cargo.toml` before each `publish`; the registry refuses to
 republish a version.
+
+---
+Part of the [gray](https://github.com/vstaln/gray) plugin ecosystem —
+the open-source AI agent harness. <https://gray.alignment.id>

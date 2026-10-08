@@ -1,7 +1,7 @@
 //! gray-gh-issues — resolve `#N` references into issue titles on submit.
 //!
-//! Port of pi's `github-issue-autocomplete` (gray has no autocomplete wire,
-//! so this resolves references instead of suggesting them). Claims
+//! Gray has no autocomplete wire, so this resolves references instead of
+//! suggesting them. Claims
 //! `input/submit` (protocol 2.0): when the submitted text contains `#<num>`
 //! and the session cwd is a checkout with a GitHub remote, each issue title
 //! is fetched with `gh issue view` (5s timeout, cached in-memory for the
