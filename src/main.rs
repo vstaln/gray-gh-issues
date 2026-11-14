@@ -28,7 +28,7 @@ fn manifest() -> Value {
         "version": env!("CARGO_PKG_VERSION"),
         "protocol": "2.0",
         "tools": [],
-        "description": "attach",
+        "description": "attach github issue titles to #N mentions",
         "commands": ["/ghissues"],
         "hooks": ["input/submit"],
     })
