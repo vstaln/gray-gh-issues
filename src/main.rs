@@ -30,6 +30,7 @@ fn manifest() -> Value {
         "tools": [],
         "description": "attach github issue titles to #N mentions",
         "commands": ["/ghissues"],
+        "command_descriptions": {"/ghissues": "toggle GitHub issue lookup for #refs"},
         "hooks": ["input/submit"],
     })
 }
