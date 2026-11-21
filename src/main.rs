@@ -134,7 +134,10 @@ impl GhIssues {
     }
 
     fn in_github_repo(&mut self, cwd: &str) -> bool {
-        *self.repo.entry(cwd.to_string()).or_insert_with(|| (self.is_repo)(cwd))
+        *self
+            .repo
+            .entry(cwd.to_string())
+            .or_insert_with(|| (self.is_repo)(cwd))
     }
 
     fn issue(&mut self, cwd: &str, n: u64) -> Option<String> {
@@ -186,7 +189,11 @@ fn run_command(argv: &[&str]) -> String {
                 std::fs::create_dir_all(&dir).and_then(|_| std::fs::write(&flag, b""))
             } else {
                 std::fs::remove_file(&flag).or_else(|e| {
-                    if e.kind() == std::io::ErrorKind::NotFound { Ok(()) } else { Err(e) }
+                    if e.kind() == std::io::ErrorKind::NotFound {
+                        Ok(())
+                    } else {
+                        Err(e)
+                    }
                 })
             };
             match res {
@@ -242,7 +249,9 @@ fn main() -> std::io::Result<()> {
     let mut stdout = std::io::stdout();
     for line in stdin.lock().lines() {
         let line = line?;
-        let Ok(req) = serde_json::from_str::<Value>(&line) else { continue };
+        let Ok(req) = serde_json::from_str::<Value>(&line) else {
+            continue;
+        };
         let (reply, exit) = handle(&mut plugin, &req);
         if let Some(reply) = reply {
             writeln!(stdout, "{reply}")?;
@@ -347,10 +356,16 @@ mod tests {
     #[test]
     fn issue_lookups_are_cached() {
         let mut p = stubbed();
-        p.issues.insert(("/repo".into(), 1), Some("cached title (OPEN)".into()));
+        p.issues
+            .insert(("/repo".into(), 1), Some("cached title (OPEN)".into()));
         p.fetch = |_, _| panic!("must not be called");
         let r = submit(&mut p, "fix #1", "/repo");
-        assert!(r["result"]["text"].as_str().unwrap().contains("cached title"));
+        assert!(
+            r["result"]["text"]
+                .as_str()
+                .unwrap()
+                .contains("cached title")
+        );
     }
 
     #[test]
